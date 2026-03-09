@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>4 Months of Us</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>4 Months of Us - Premium Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #1a0a14;
-            --primary-pink: #d84b79;
-            --text-light: #fef0f5;
-            --card-bg: rgba(255, 255, 255, 0.05);
+            --primary-pink: #ff4d85;
+            --gold: #f4d068;
+            --text-light: #ffffff;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
 
         body, html {
@@ -18,261 +19,362 @@
             padding: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, var(--bg-color) 0%, #3a1128 100%);
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Montserrat', sans-serif;
             color: var(--text-light);
             overflow: hidden;
+            background-color: #0a0005;
+        }
+
+        /* Animated Deep Romantic Background */
+        .bg-animation {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(45deg, #1a000c, #3d001e, #14001a, #2b0015);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            z-index: -2;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Mouse Trail Canvas */
+        #sparkle-canvas {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
         }
 
         h1, h2, h3 {
-            font-family: 'Playfair Display', serif;
-            font-weight: 600;
+            font-family: 'Dancing Script', cursive;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin: 0;
         }
 
-        .heart {
-            position: absolute;
-            top: -10vh;
-            color: var(--primary-pink);
-            opacity: 0.6;
-            font-size: 1.5rem;
-            animation: fall linear forwards;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        @keyframes fall {
-            to { transform: translateY(110vh) rotate(360deg); }
-        }
+        h2 { font-size: 4rem; text-shadow: 0 0 20px rgba(255, 77, 133, 0.6); }
+        h3 { font-size: 3rem; color: var(--gold); text-shadow: 0 0 15px rgba(244, 208, 104, 0.4); margin-bottom: 15px; }
 
         #app-container {
             position: relative;
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             z-index: 10;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
+            display: flex; justify-content: center; align-items: center; text-align: center;
         }
 
         .section {
             display: none;
-            flex-direction: column;
-            align-items: center;
-            width: 90%;
-            max-width: 600px;
-            animation: fadeIn 1s ease-in-out;
+            flex-direction: column; align-items: center;
+            width: 90%; max-width: 700px;
         }
 
         .section.active {
             display: flex;
+            animation: cinematicFadeIn 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes cinematicFadeIn {
+            0% { opacity: 0; transform: translateY(50px) scale(0.9); filter: blur(10px); }
+            100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
         }
 
+        /* Premium Glass Button */
         button {
-            background-color: var(--primary-pink);
+            background: rgba(255, 77, 133, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--primary-pink);
             color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 25px;
-            font-size: 1rem;
-            font-family: 'Poppins', sans-serif;
+            padding: 16px 45px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
             cursor: pointer;
-            margin-top: 20px;
-            box-shadow: 0 4px 15px rgba(216, 75, 121, 0.4);
-            transition: transform 0.2s, background-color 0.2s;
+            margin-top: 40px;
+            box-shadow: 0 0 20px rgba(255, 77, 133, 0.3), inset 0 0 10px rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
         }
 
+        button::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: 0.5s;
+        }
+
+        button:hover::before { left: 100%; }
         button:hover {
-            transform: scale(1.05);
-            background-color: #e85d8d;
+            background: var(--primary-pink);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(255, 77, 133, 0.6);
+            border-color: transparent;
         }
 
-        .gallery-grid {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-            overflow-x: auto;
-            padding: 10px;
-            max-width: 100%;
-        }
-
-        .gallery-item {
-            min-width: 150px;
-            height: 200px;
-            background-color: var(--card-bg);
-            border-radius: 10px;
-            object-fit: cover;
-            border: 2px solid rgba(255,255,255,0.1);
-        }
-
-        .quiz-container {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 15px;
-            backdrop-filter: blur(5px);
+        /* Glassmorphism Quiz & Counter Card */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
             width: 100%;
         }
 
-        .options-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 20px;
+        /* 3D Gallery Grid */
+        .gallery-grid {
+            display: flex; gap: 25px; margin-top: 30px; padding: 30px 10px;
+            overflow-x: auto; max-width: 100%; scrollbar-width: none;
+            perspective: 1000px; /* 3D effect enabler */
         }
+        .gallery-grid::-webkit-scrollbar { display: none; }
 
-        .option-btn {
-            background: rgba(255, 255, 255, 0.1);
-            margin-top: 0;
-            box-shadow: none;
-        }
-
-        .envelope {
-            font-size: 80px;
+        .gallery-item {
+            min-width: 200px; height: 280px;
+            background: #fff; padding: 10px 10px 30px 10px;
+            border-radius: 8px; object-fit: cover;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.6s ease;
             cursor: pointer;
-            animation: bounce 2s infinite;
+            filter: contrast(0.9) sepia(0.2); /* Vintage cinematic feel */
         }
 
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(-20px);}
-            60% {transform: translateY(-10px);}
+        .gallery-item:nth-child(1) { transform: rotateY(-15deg) rotateZ(-2deg); }
+        .gallery-item:nth-child(2) { transform: translateZ(-20px) translateY(10px); }
+        .gallery-item:nth-child(3) { transform: rotateY(15deg) rotateZ(2deg); }
+
+        .gallery-item:hover {
+            transform: scale(1.15) rotateY(0deg) rotateZ(0deg) translateZ(30px) !important;
+            filter: contrast(1.1) sepia(0);
+            z-index: 50;
+            box-shadow: 0 30px 60px rgba(255, 77, 133, 0.5);
         }
 
+        /* Quiz Options */
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 30px; }
+        .option-btn { margin-top: 0; padding: 12px; font-size: 0.9rem; text-transform: none; letter-spacing: 1px; }
+
+        /* The Premium Envelope & Letter */
+        .envelope-wrapper {
+            position: relative; width: 150px; height: 120px; margin: 0 auto 30px;
+            cursor: pointer; animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); drop-shadow: 0 30px 20px rgba(0,0,0,0.4); }
+        }
+
+        .envelope { font-size: 120px; line-height: 120px; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.5)); transition: all 0.5s ease; }
+        
         .letter-content {
             display: none;
-            background: #fff8eb;
-            color: #333;
-            padding: 30px;
-            border-radius: 10px;
-            font-family: 'Playfair Display', serif;
-            font-size: 0.9rem;
-            line-height: 1.6;
-            height: 60vh;
-            overflow-y: auto;
-            text-align: left;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            background: url('https://www.transparenttextures.com/patterns/cream-paper.png'), linear-gradient(to bottom, #fffdf8, #f4e8d8);
+            color: #3a1a26; padding: 50px; border-radius: 10px;
+            font-size: 1.1rem; line-height: 2; text-align: left;
+            height: 60vh; overflow-y: auto;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8), inset 0 0 20px rgba(0,0,0,0.1);
+            position: relative;
         }
+
+        /* Wax seal effect */
+        .letter-content::before {
+            content: '❤'; position: absolute; top: 15px; right: 20px;
+            color: #b3003b; font-size: 2rem; opacity: 0.8;
+            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));
+        }
+
+        .letter-content.show { display: block; animation: openPremiumLetter 1.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+
+        @keyframes openPremiumLetter {
+            0% { opacity: 0; transform: translateY(150px) scale(0.7) rotateX(-40deg); filter: blur(20px); }
+            100% { opacity: 1; transform: translateY(0) scale(1) rotateX(0); filter: blur(0); }
+        }
+
+        .letter-content p strong { font-family: 'Dancing Script', cursive; font-size: 2.5rem; color: #b3003b; font-weight: 700; }
+        .signature { text-align: right; margin-top: 40px; font-family: 'Dancing Script', cursive; font-size: 2.5rem; color: #b3003b; }
+
     </style>
 </head>
 <body>
 
-    <div id="hearts"></div>
+    <audio id="bg-music" loop>
+        <source src="chand_si_mehbooba.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="bg-animation"></div>
+    
+    <canvas id="sparkle-canvas"></canvas>
 
     <div id="app-container">
         
         <div id="sec-landing" class="section active">
-            <h2>Happy 4 Months, my love 💍</h2>
-            <p>Every second with you is a gift...</p>
-            <button onclick="nextSection('sec-counter')">Open it when you're ready</button>
+            <h2>Happy 4 Months, MY love</h2>
+            <p style="font-size: 1.3rem; opacity: 0.8; font-weight: 300; margin-top: 10px;">Every heartbeat belongs to you.</p>
+            <button onclick="startJourney()">Unlock Our World</button>
         </div>
 
         <div id="sec-counter" class="section">
-            <h3>Where it all started</h3>
-            <p style="opacity: 0.7;">NOVEMBER 10, 2025 | 11:34 PM</p>
-            <h1 style="font-size: 3.5rem; margin: 10px 0; color: var(--primary-pink);" id="days-counter">0</h1>
-            <p id="time-detail">Loading our time together...</p>
-            <button onclick="nextSection('sec-gallery')">See our memories</button>
+            <div class="glass-card">
+                <h3>Where it all started</h3>
+                <p style="opacity: 0.7; font-size: 0.8rem; letter-spacing: 4px; text-transform: uppercase;">November 10, 2025 | 11:34 PM</p>
+                <h1 style="font-size: 4.5rem; margin: 20px 0; background: -webkit-linear-gradient(45deg, var(--gold), #ff7eb3); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 10px rgba(244, 208, 104, 0.4));" id="days-counter">0 Days</h1>
+                <p id="time-detail" style="font-size: 1.2rem; font-weight: 300;">Calculating eternity...</p>
+                <button onclick="nextSection('sec-gallery')">Relive Memories</button>
+            </div>
         </div>
 
         <div id="sec-gallery" class="section">
-            <h3>Moments that made us "us" ❤️</h3>
+            <h3>Moments of Magic</h3>
             <div class="gallery-grid">
-                <img src="1.jpeg.jpeg">
-                <img src="2.jpeg.jpeg">
-                <img src="3.jpeg.jpeg" class="gallery-item">
+                <img src="1.jpeg.jpeg" class="gallery-item" alt="Us">
+                <img src="2.jpeg.jpeg" class="gallery-item" alt="Us">
+                <img src="3.jpeg.jpeg" class="gallery-item" alt="Us">
             </div>
-            <button onclick="nextSection('sec-quiz-intro')">Continue my journey</button>
+            <button onclick="nextSection('sec-quiz-intro')">Proceed</button>
         </div>
 
         <div id="sec-quiz-intro" class="section">
-            <h3>A little game for you</h3>
-            <p>Unlock the final piece of my heart.</p>
-            <h1 style="font-size: 3rem;">💖 💖 💖</h1>
-            <button onclick="startQuiz()">Tap to unlock</button>
+            <h3>A Little Test...</h3>
+            <p style="font-size: 1.2rem; font-weight: 300;">Unlock the final piece of my heart.</p>
+            <h1 style="font-size: 4rem; margin: 20px 0; color: var(--gold);">✨ 💖 ✨</h1>
+            <button onclick="startQuiz()">Accept Challenge</button>
         </div>
 
         <div id="sec-quiz" class="section">
-            <div class="quiz-container">
-                <h3>How well do you know us?</h3>
-                <p id="question-text" style="font-weight: 600; margin-bottom: 20px;"></p>
+            <div class="glass-card">
+                <h3 style="font-size: 2rem;">How well do you know us?</h3>
+                <p id="question-text" style="font-size: 1.3rem; margin: 20px 0; font-weight: 400;"></p>
                 <div class="options-grid" id="options-container"></div>
             </div>
         </div>
 
         <div id="sec-letter" class="section">
-            <h3>A Letter For You</h3>
-            <div id="envelope" class="envelope" onclick="openLetter()">💌</div>
-            <p id="tap-text" style="font-size: 0.8rem; opacity: 0.7;">Tap to view</p>
+            <h3 style="margin-bottom: 40px;">For Your Eyes Only</h3>
+            <div class="envelope-wrapper" onclick="openLetter()">
+                <div id="envelope" class="envelope">💌</div>
+            </div>
+            <p id="tap-text" style="font-size: 0.9rem; opacity: 0.5; letter-spacing: 2px; text-transform: uppercase;">Tap to break the seal</p>
             
             <div id="letter-content" class="letter-content">
                 <p><strong>My Dearest,</strong></p>
-                <p>Happy 4th month anniversary! It feels like just yesterday it was November 10th and my world changed forever at 11:34 PM.</p>
-                <p>These past four months have been the happiest of my life. Thank you for every laugh, every late-night talk, and for just being you. I am so lucky to have you by my side.</p>
-                <p>I can't wait for many more months and years to come. I love you!</p>
-                <p>Forever yours, ❤️</p>
-            </div>
+                <p>Happy 4th month anniversary! It feels like just yesterday it was November 10th, and my world changed completely at exactly 11:34 PM.</p>
+                <p>These past four months have been nothing short of a movie. Every smile, every random conversation, and every single second spent with you feels like pure magic. You aren't just my partner; you are my peace, my chaos, and my favorite part of every day.</p>
+                <p>I promise to keep annoying you, loving you, and making memories with you for all the months and years to come. Thank you for making my life beautiful bs bahut nhi bolunga meri jaan aap isi tarah saath raho haath pakar kar 4 mahise kl 40 saal bhi karenge ok meri jaan ??.</p>
+                <div class="signature">Your Patidev , ❤️</div>
+</div>                                
         </div>
 
     </div>
 
     <script>
-        // --- Background Hearts ---
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            heart.innerHTML = ['❤️', '💖', '✨', '💍'][Math.floor(Math.random() * 4)];
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = Math.random() * 3 + 4 + 's';
-            heart.style.fontSize = Math.random() * 1 + 1 + 'rem';
-            document.getElementById('hearts').appendChild(heart);
-            setTimeout(() => { heart.remove(); }, 7000);
+        // --- 1. MOUSE TRAIL SPARKLE EFFECT (THE STARS) ---
+        const canvas = document.getElementById('sparkle-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+
+        let particlesArray = [];
+        const colors = ['#f4d068', '#ff4d85', '#ffffff'];
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        const mouse = { x: null, y: null };
+        window.addEventListener('mousemove', (event) => {
+            mouse.x = event.x; mouse.y = event.y;
+            for (let i = 0; i < 3; i++) { particlesArray.push(new Particle()); }
+        });
+
+        class Particle {
+            constructor() {
+                this.x = mouse.x; this.y = mouse.y;
+                this.size = Math.random() * 5 + 1;
+                this.speedX = Math.random() * 3 - 1.5;
+                this.speedY = Math.random() * 3 - 1.5;
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                this.life = 100; // Opacity lifetime
+            }
+            update() {
+                this.x += this.speedX; this.y += this.speedY;
+                if (this.size > 0.1) this.size -= 0.05;
+                this.life -= 2;
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = this.life / 100;
+                ctx.beginPath();
+                // Star shape drawing
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.globalAlpha = 1; // reset
+            }
         }
-        setInterval(createHeart, 400);
+
+        function handleParticles() {
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+                if (particlesArray[i].life <= 0 || particlesArray[i].size <= 0.1) {
+                    particlesArray.splice(i, 1);
+                    i--;
+                }
+            }
+        }
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            handleParticles();
+            requestAnimationFrame(animateCanvas);
+        }
+        animateCanvas();
+
+        // --- 2. CORE LOGIC (MUSIC & NAVIGATION) ---
+        function startJourney() {
+            let music = document.getElementById("bg-music");
+            music.volume = 0.7;
+            music.play().catch(e => console.log("Audio play failed."));
+            nextSection('sec-counter');
+        }
 
         function nextSection(sectionId) {
             document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
             document.getElementById(sectionId).classList.add('active');
         }
 
-        // --- Precise Counter Logic ---
+        // --- 3. COUNTER ---
         const startDate = new Date('2025-11-10T23:34:00'); 
-
         function updateCounter() {
-            const now = new Date();
-            const diff = now - startDate;
-
+            const now = new Date(); const diff = now - startDate;
             const days = Math.floor(diff / (1000 * 60 * 60 * 24));
             const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
             const mins = Math.floor((diff / (1000 * 60)) % 60);
+            
+            // Handle negative numbers if date is in future
+            if (diff < 0) {
+                 document.getElementById('days-counter').innerText = "Soon...";
+                 document.getElementById('time-detail').innerText = "Waiting for our moment.";
+                 return;
+            }
 
             document.getElementById('days-counter').innerText = days + " Days";
-            document.getElementById('time-detail').innerText = `${hours} hours and ${mins} minutes of pure happiness.`;
+            document.getElementById('time-detail').innerText = `${hours} hours and ${mins} minutes of pure bliss.`;
         }
-        setInterval(updateCounter, 1000);
-        updateCounter();
+        setInterval(updateCounter, 1000); updateCounter();
 
-        // --- Quiz Logic ---
+        // --- 4. QUIZ ---
         const questions = [
-            {
-                q: "What time did it all start?",
-                options: ["10:30 PM", "11:34 PM", "12:00 AM", "11:00 PM"],
-                answer: "11:34 PM"
-            },
-            {
-                q: "Which month did we meet?",
-                options: ["October", "December", "November", "January"],
-                answer: "November"
-            },
-            {
-                q: "How many months are we celebrating?",
-                options: ["2 Months", "4 Months", "1 Year", "6 Months"],
-                answer: "4 Months"
-            }
+            { q: "What exact time did our story start?", options: ["10:30 PM", "11:34 PM", "12:00 AM", "11:00 PM"], answer: "11:34 PM" },
+            { q: "Which month holds our beginning?", options: ["October", "December", "November", "January"], answer: "November" },
+            { q: "How many months are we celebrating today?", options: ["2 Months", "4 Months", "1 Year", "6 Months"], answer: "4 Months" }
         ];
 
         let currentQ = 0;
@@ -286,21 +388,28 @@
             container.innerHTML = '';
             qData.options.forEach(opt => {
                 const btn = document.createElement('button');
-                btn.className = 'option-btn';
-                btn.innerText = opt;
+                btn.className = 'option-btn'; btn.innerText = opt;
                 btn.onclick = () => {
                     if(opt === qData.answer) { currentQ++; loadQuestion(); }
-                    else { alert("Try again, love! 😉"); }
+                    else { alert("Aww, try again love! ✨"); }
                 };
                 container.appendChild(btn);
             });
         }
 
+        // --- 5. LETTER OPENING ---
         function openLetter() {
-            document.getElementById('envelope').style.display = 'none';
-            document.getElementById('tap-text').style.display = 'none';
-            const letter = document.getElementById('letter-content');
-            letter.style.display = 'block';
+            const envelope = document.getElementById('envelope');
+            envelope.style.transform = "scale(0) rotate(180deg)";
+            envelope.style.opacity = "0";
+            document.getElementById('tap-text').style.opacity = '0';
+            
+            setTimeout(() => {
+                document.querySelector('.envelope-wrapper').style.display = 'none';
+                document.getElementById('tap-text').style.display = 'none';
+                const letter = document.getElementById('letter-content');
+                letter.classList.add('show');
+            }, 500);
         }
     </script>
 </body>
