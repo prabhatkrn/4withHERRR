@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4 Months of Us</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #1a0a14;
+            --primary-pink: #d84b79;
+            --text-light: #fef0f5;
+            --card-bg: rgba(255, 255, 255, 0.05);
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--bg-color) 0%, #3a1128 100%);
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-light);
+            overflow: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        .heart {
+            position: absolute;
+            top: -10vh;
+            color: var(--primary-pink);
+            opacity: 0.6;
+            font-size: 1.5rem;
+            animation: fall linear forwards;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
+
+        #app-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .section {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            width: 90%;
+            max-width: 600px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .section.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        button {
+            background-color: var(--primary-pink);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(216, 75, 121, 0.4);
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            background-color: #e85d8d;
+        }
+
+        .gallery-grid {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            overflow-x: auto;
+            padding: 10px;
+            max-width: 100%;
+        }
+
+        .gallery-item {
+            min-width: 150px;
+            height: 200px;
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            object-fit: cover;
+            border: 2px solid rgba(255,255,255,0.1);
+        }
+
+        .quiz-container {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            width: 100%;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .option-btn {
+            background: rgba(255, 255, 255, 0.1);
+            margin-top: 0;
+            box-shadow: none;
+        }
+
+        .envelope {
+            font-size: 80px;
+            cursor: pointer;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-20px);}
+            60% {transform: translateY(-10px);}
+        }
+
+        .letter-content {
+            display: none;
+            background: #fff8eb;
+            color: #333;
+            padding: 30px;
+            border-radius: 10px;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            height: 60vh;
+            overflow-y: auto;
+            text-align: left;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="hearts"></div>
+
+    <div id="app-container">
+        
+        <div id="sec-landing" class="section active">
+            <h2>Happy 4 Months, my love 💍</h2>
+            <p>Every second with you is a gift...</p>
+            <button onclick="nextSection('sec-counter')">Open it when you're ready</button>
+        </div>
+
+        <div id="sec-counter" class="section">
+            <h3>Where it all started</h3>
+            <p style="opacity: 0.7;">NOVEMBER 10, 2025 | 11:34 PM</p>
+            <h1 style="font-size: 3.5rem; margin: 10px 0; color: var(--primary-pink);" id="days-counter">0</h1>
+            <p id="time-detail">Loading our time together...</p>
+            <button onclick="nextSection('sec-gallery')">See our memories</button>
+        </div>
+
+        <div id="sec-gallery" class="section">
+            <h3>Moments that made us "us" ❤️</h3>
+            <div class="gallery-grid">
+                <img src="https://freeimage.host/i/qujapJj" class="gallery-item">
+                <img src="https://freeimage.host/i/qujabUb" class="gallery-item">
+                <img src="https://freeimage.host/i/qujaLW7" class="gallery-item">
+            </div>
+            <button onclick="nextSection('sec-quiz-intro')">Continue my journey</button>
+        </div>
+
+        <div id="sec-quiz-intro" class="section">
+            <h3>A little game for you</h3>
+            <p>Unlock the final piece of my love.</p>
+            <h1 style="font-size: 3rem;">💖 💖 💖</h1>
+            <button onclick="startQuiz()">Tap to unlock</button>
+        </div>
+
+        <div id="sec-quiz" class="section">
+            <div class="quiz-container">
+                <h3>How well do you know us?</h3>
+                <p id="question-text" style="font-weight: 600; margin-bottom: 20px;"></p>
+                <div class="options-grid" id="options-container"></div>
+            </div>
+        </div>
+
+        <div id="sec-letter" class="section">
+            <h3>A Letter For You</h3>
+            <div id="envelope" class="envelope" onclick="openLetter()">💌</div>
+            <p id="tap-text" style="font-size: 0.8rem; opacity: 0.7;">Tap to view</p>
+            
+            <div id="letter-content" class="letter-content">
+                <p><strong>My Dearest,</strong></p>
+                <p>Happy 4th month anniversary my lovee! It feels like just yesterday it was November 10th and my world changed forever at 11:34 PM.</p>
+                <p>These past four months have been the happiest of my life. Thank you for every laugh, every late-night talk, and for just being you. I am so lucky to have you by my side my girl.</p>
+                <p> Please stay with me like this with , holding my hand. I love you meri jaan !</p>
+                <p>Forever yours your Patidev, ❤️</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // --- Background Hearts ---
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = ['❤️', '💖', '✨', '💍'][Math.floor(Math.random() * 4)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 4 + 's';
+            heart.style.fontSize = Math.random() * 1 + 1 + 'rem';
+            document.getElementById('hearts').appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 7000);
+        }
+        setInterval(createHeart, 400);
+
+        function nextSection(sectionId) {
+            document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        // --- Precise Counter Logic ---
+        const startDate = new Date('2025-11-10T23:34:00'); 
+
+        function updateCounter() {
+            const now = new Date();
+            const diff = now - startDate;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const mins = Math.floor((diff / (1000 * 60)) % 60);
+
+            document.getElementById('days-counter').innerText = days + " Days";
+            document.getElementById('time-detail').innerText = `${hours} hours and ${mins} minutes of pure happiness.`;
+        }
+        setInterval(updateCounter, 1000);
+        updateCounter();
+
+        // --- Quiz Logic ---
+        const questions = [
+            {
+                q: "What time did it all start?",
+                options: ["10:30 PM", "11:34 PM", "12:00 AM", "11:00 PM"],
+                answer: "11:34 PM"
+            },
+            {
+                q: "Which month did we meet?",
+                options: ["October", "December", "November", "January"],
+                answer: "November"
+            },
+            {
+                q: "How many months are we celebrating?",
+                options: ["2 Months", "4 Months", "1 Year", "6 Months"],
+                answer: "4 Months"
+            }
+        ];
+
+        let currentQ = 0;
+        function startQuiz() { currentQ = 0; loadQuestion(); nextSection('sec-quiz'); }
+
+        function loadQuestion() {
+            if (currentQ >= questions.length) { nextSection('sec-letter'); return; }
+            const qData = questions[currentQ];
+            document.getElementById('question-text').innerText = qData.q;
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+            qData.options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerText = opt;
+                btn.onclick = () => {
+                    if(opt === qData.answer) { currentQ++; loadQuestion(); }
+                    else { alert("Try again, love! 😉"); }
+                };
+                container.appendChild(btn);
+            });
+        }
+
+        function openLetter() {
+            document.getElementById('envelope').style.display = 'none';
+            document.getElementById('tap-text').style.display = 'none';
+            const letter = document.getElementById('letter-content');
+            letter.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
